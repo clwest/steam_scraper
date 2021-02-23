@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <title>Steam games</title>
+</head>
+<body>
+    <div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="true" href="/show">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="true" href="/">Steam Games</a>
+            </li>
+        </ul>
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">Steam Top 100 games</h5>
+        <p class="card-text">All the games listed below are scraped from the Steam store using Scrapy and Scrapyrt.</p>
+        <p>To learn more click the link below</p>
+        <a href="https://scrapy.org" class="btn btn-primary">Learn More</a>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        {% for game in games %}
+            {% if loop.index0 % 3 == 0 %}
+                <div class="row justify-content-center mt-4 mb-4">
+            {% endif %}
+            
+            <div class="card  mr-4" style="width: 18rem;">
+                <img src="{{game.get('img_url')}}" class="card-img-top">
+                <div class="card-body">
+                <h5 class="card-title">{{game.get('game_name')}}</h5>
+                <h5 class="card-title">{{game.get('original_price')}}</h5>
+                <p class="card-text">Supported platforms: {{game.get('platforms')}}</p>
+                <a href="{{game.get('game_url')}}" class="btn btn-primary">Game URL</a>
+                </div>
+            </div>
+
+            {% if loop.index0 % 3 == 2 %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+
+    </div>
+</body>
+</html>
